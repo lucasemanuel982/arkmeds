@@ -6,7 +6,69 @@
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "29944103"
   },
-  "item": [],
+  "item": [
+    {
+      "name": "ARK-01-driver",
+      "item": [
+        {
+          "name": "Criar motorista",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": ["var j = pm.response.json();", "if (pm.response.code === 201 && j.id) { pm.collectionVariables.set('driverId', j.id); }"],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"nome\": \"João Silva\",\n  \"cpf\": \"111.444.777-35\",\n  \"dataNascimento\": \"1990-05-15\",\n  \"sexo\": \"M\",\n  \"endereco\": {\n    \"rua\": \"Rua das Flores\",\n    \"numero\": \"123\",\n    \"bairro\": \"Centro\",\n    \"cidade\": \"São Paulo\",\n    \"cep\": \"01000-000\"\n  }\n}" },
+            "url": "{{baseUrl}}/driver",
+            "description": "POST /driver - Criar motorista. Erros: 400 (CPF inválido, data inválida, body inválido), 409 (CPF duplicado)."
+          }
+        },
+        {
+          "name": "Listar motoristas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/driver",
+            "description": "GET /driver - Listar motoristas."
+          }
+        },
+        {
+          "name": "Buscar motorista por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/driver/{{driverId}}",
+            "description": "GET /driver/:id - Buscar por id. 404 se não existir."
+          }
+        },
+        {
+          "name": "Atualizar motorista",
+          "request": {
+            "method": "PUT",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"nome\": \"João Silva Atualizado\",\n  \"sexo\": \"M\"\n}" },
+            "url": "{{baseUrl}}/driver/{{driverId}}",
+            "description": "PUT /driver/:id - Atualizar. Campos opcionais: nome, cpf, dataNascimento, sexo, endereco. 400 (CPF/data inválidos), 404, 409 (CPF duplicado)."
+          }
+        },
+        {
+          "name": "Remover motorista",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/driver/{{driverId}}",
+            "description": "DELETE /driver/:id - Remover. 404 se não existir."
+          }
+        }
+      ]
+    }
+  ],
   "event": [
     {
       "listen": "prerequest",
@@ -34,6 +96,11 @@
   "variable": [
     {
       "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "default"
+    },
+    {
+      "key": "driverId",
       "value": "",
       "type": "default"
     }
