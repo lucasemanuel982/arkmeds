@@ -35,3 +35,10 @@ export class DriverNotFoundError extends AppError {
     this.name = "DriverNotFoundError";
   }
 }
+
+export class PassengerNotFoundError extends AppError {
+  constructor(message = "Passageiro não encontrado") {
+    super(message, 404);
+    this.name = "PassengerNotFoundError";
+  }
+}
