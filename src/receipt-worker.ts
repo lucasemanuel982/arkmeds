@@ -7,6 +7,7 @@ import { RACE_ACCEPTED_QUEUE_NAME } from "./infrastructure/queue/constants";
 import { redisUrlToConnection } from "./infrastructure/queue/redisConnection";
 import type { RaceAcceptedJobData } from "./infrastructure/race/BullMQRaceAcceptedNotifier";
 import { env } from "./infrastructure/config/env";
+import { logger } from "./shared/logger";
 
 function jobDataToRace(d: RaceAcceptedJobData): Race {
   return {
@@ -35,11 +36,11 @@ async function main(): Promise<void> {
   );
 
   worker.on("completed", (job) => {
-    console.log(`Recibo gerado: race ${job.data.id ?? job.data.requestId}`);
+    logger.info({ raceId: job.data.id ?? job.data.requestId }, "Recibo gerado");
   });
 
   worker.on("failed", (job, err) => {
-    console.error(`Falha ao gerar recibo (job ${job?.id}):`, err?.message ?? err);
+    logger.error({ jobId: job?.id, err }, "Falha ao gerar recibo");
   });
 
   const shutdown = async (): Promise<void> => {
@@ -50,10 +51,10 @@ async function main(): Promise<void> {
   process.on("SIGTERM", shutdown);
   process.on("SIGINT", shutdown);
 
-  console.log("Worker de recibo iniciado. Aguardando jobs...");
+  logger.info("Worker de recibo iniciado. Aguardando jobs...");
 }
 
 main().catch((err) => {
-  console.error("Erro ao iniciar worker:", err);
+  logger.error({ err }, "Erro ao iniciar worker");
   process.exit(1);
 });

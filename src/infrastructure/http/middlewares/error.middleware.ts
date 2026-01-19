@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { AppError } from "../../../shared/errors/AppError";
+import { logger } from "../../../shared/logger";
 
 interface PgError extends Error {
   code?: string;
@@ -20,6 +21,6 @@ export function errorMiddleware(
     res.status(409).json({ error: "CPF já cadastrado" });
     return;
   }
-  console.error(err);
+  logger.error({ err }, "Erro interno do servidor");
   res.status(500).json({ error: "Erro interno do servidor" });
 }
