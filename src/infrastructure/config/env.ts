@@ -3,6 +3,7 @@ import os from "os";
 
 export const env = {
   port: Number(process.env.PORT) || 3000,
+  host: process.env.HOST ?? "0.0.0.0",
   database: {
     url:
       process.env.DATABASE_URL ??

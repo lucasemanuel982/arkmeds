@@ -21,7 +21,9 @@
     "docker:logs": "docker compose logs -f app",
     "docker:logs:worker": "docker compose logs -f worker",
     "worker": "node dist/receipt-worker.js",
-    "worker:dev": "ts-node-dev --respawn --transpile-only src/receipt-worker.ts"
+    "worker:dev": "ts-node-dev --respawn --transpile-only src/receipt-worker.ts",
+    "start:pm2": "pm2-runtime start ecosystem.config.cjs --only app",
+    "worker:pm2": "pm2-runtime start ecosystem.config.cjs --only worker"
   },
   "author": "Lucas Emanuel Silva Dos Santos",
   "license": "ISC",
@@ -43,6 +45,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "pm2": "^5.4.3",
     "bullmq": "^5.34.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
