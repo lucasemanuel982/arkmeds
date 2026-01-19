@@ -36,6 +36,20 @@ export class DriverNotFoundError extends AppError {
   }
 }
 
+export class InvalidCoordinatesError extends AppError {
+  constructor(message = "Coordenadas inválidas") {
+    super(message, 400);
+    this.name = "InvalidCoordinatesError";
+  }
+}
+
+export class InvalidDateTimeError extends AppError {
+  constructor(message = "Data/hora inválida") {
+    super(message, 400);
+    this.name = "InvalidDateTimeError";
+  }
+}
+
 export class PassengerNotFoundError extends AppError {
   constructor(message = "Passageiro não encontrado") {
     super(message, 404);
