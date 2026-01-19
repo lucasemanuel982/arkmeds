@@ -1,0 +1,443 @@
+{
+  "info": {
+    "_postman_id": "e395d212-73c8-464c-8fa1-9df64fbe72de",
+    "name": "Arkmeds",
+    "description": "Coleção da API do projeto Arkmeds",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "29944103"
+  },
+  "item": [
+    {
+      "name": "Driver",
+      "item": [
+        {
+          "name": "Criar motorista",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var j = pm.response.json();",
+                  "if (pm.response.code === 201 && j.id) { pm.collectionVariables.set('driverId', j.id); }"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"João Silva\",\n  \"cpf\": \"111.444.777-35\",\n  \"dataNascimento\": \"1990-05-15\",\n  \"sexo\": \"M\",\n  \"endereco\": {\n    \"rua\": \"Rua das Flores\",\n    \"numero\": \"123\",\n    \"bairro\": \"Centro\",\n    \"cidade\": \"São Paulo\",\n    \"cep\": \"01000-000\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/driver",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "driver"
+              ]
+            },
+            "description": "POST /driver - Criar motorista. Erros: 400 (CPF inválido, data inválida, body inválido), 409 (CPF duplicado)."
+          },
+          "response": []
+        },
+        {
+          "name": "Listar motoristas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/driver",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "driver"
+              ]
+            },
+            "description": "GET /driver - Listar motoristas."
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar motorista por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/driver/{{driverId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "driver",
+                "{{driverId}}"
+              ]
+            },
+            "description": "GET /driver/:id - Buscar por id. 404 se não existir."
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar motorista",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"João Silva Atualizado\",\n  \"sexo\": \"M\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/driver/{{driverId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "driver",
+                "{{driverId}}"
+              ]
+            },
+            "description": "PUT /driver/:id - Atualizar. Campos opcionais: nome, cpf, dataNascimento, sexo, endereco. 400 (CPF/data inválidos), 404, 409 (CPF duplicado)."
+          },
+          "response": []
+        },
+        {
+          "name": "Remover motorista",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/driver/{{driverId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "driver",
+                "{{driverId}}"
+              ]
+            },
+            "description": "DELETE /driver/:id - Remover. 404 se não existir."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Passenger",
+      "item": [
+        {
+          "name": "Criar passenger",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var j = pm.response.json();",
+                  "if (pm.response.code === 201 && j.id) { pm.collectionVariables.set('passengerId', j.id); }"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Maria Santos\",\n  \"cpf\": \"111.444.777-35\",\n  \"dataNascimento\": \"1992-08-20\",\n  \"sexo\": \"F\",\n  \"endereco\": {\n    \"rua\": \"Rua das Flores\",\n    \"numero\": \"456\",\n    \"bairro\": \"Centro\",\n    \"cidade\": \"Rio de Janeiro\",\n    \"cep\": \"20000-000\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/passenger",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "passenger"
+              ]
+            },
+            "description": "POST /passenger - Criar passenger. Erros: 400 (CPF inválido, data inválida, body inválido), 409 (CPF duplicado)."
+          },
+          "response": []
+        },
+        {
+          "name": "Listar passengers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/passenger",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "passenger"
+              ]
+            },
+            "description": "GET /passenger - Listar passengers."
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar passenger por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/passenger/{{passengerId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "passenger",
+                "{{passengerId}}"
+              ]
+            },
+            "description": "GET /passenger/:id - Buscar por id. 404 se não existir."
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar passenger",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Maria Santos Atualizado\",\n  \"sexo\": \"F\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/passenger/{{passengerId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "passenger",
+                "{{passengerId}}"
+              ]
+            },
+            "description": "PUT /passenger/:id - Atualizar. Campos opcionais: nome, cpf, dataNascimento, sexo, endereco. 400 (CPF/data inválidos), 404, 409 (CPF duplicado)."
+          },
+          "response": []
+        },
+        {
+          "name": "Remover passenger",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/passenger/{{passengerId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "passenger",
+                "{{passengerId}}"
+              ]
+            },
+            "description": "DELETE /passenger/:id - Remover. 404 se não existir."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Fare",
+      "item": [
+        {
+          "name": "Calcular tarifa (dia útil 08:00)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from\": { \"lat\": -23.5505, \"lng\": -46.6333 },\n  \"to\": { \"lat\": -22.9099, \"lng\": -47.0626 },\n  \"datetime\": \"2025-01-15T08:00:00-03:00\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/fare",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fare"
+              ]
+            },
+            "description": "POST /fare - Calcular tarifa. from/to: { lat, lng }; datetime: ISO 8601 com timezone (ex: -03:00, Z). Retorna: fare, distanceKm, strategy (day|night|weekend_day|weekend_night)."
+          },
+          "response": []
+        },
+        {
+          "name": "Noite 23:00 (dia útil)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from\": { \"lat\": -23.5505, \"lng\": -46.6333 },\n  \"to\": { \"lat\": -22.9099, \"lng\": -47.0626 },\n  \"datetime\": \"2025-01-15T23:00:00-03:00\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/fare",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fare"
+              ]
+            },
+            "description": "Exemplo noturno (22:00–06:00) em dia útil → strategy night."
+          },
+          "response": []
+        },
+        {
+          "name": "Fim de semana 17:00",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from\": { \"lat\": -23.5505, \"lng\": -46.6333 },\n  \"to\": { \"lat\": -22.9099, \"lng\": -47.0626 },\n  \"datetime\": \"2025-01-18T17:00:00-03:00\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/fare",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "fare"
+              ]
+            },
+            "description": "Exemplo sábado 17:00 → strategy weekend_day. datetime com timezone -03:00."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Race",
+      "item": [
+        {
+          "name": "Aceitar corrida",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"{{passengerId}}\",\n  \"requestId\": \"req-001\",\n  \"from\": { \"lat\": -23.5505, \"lng\": -46.6333 },\n  \"to\": { \"lat\": -22.9099, \"lng\": -47.0626 },\n  \"price\": 250.5,\n  \"distanceKm\": 100.2,\n  \"datetime\": \"2025-01-15T08:00:00-03:00\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/race",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "race"
+              ]
+            },
+            "description": "POST /race - Aceitar corrida. userId = ID do passageiro; requestId = identificador da oferta; from, to, price, distanceKm, datetime. Retorna 202 Accepted. O recibo é gerado em background em {RECEIPT_BASE_PATH ou /tmp}/{userId}/{yyyy-mm-dd}.txt (JSON)."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "health"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "default"
+    },
+    {
+      "key": "driverId",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "passengerId",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}

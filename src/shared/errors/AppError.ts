@@ -1,0 +1,65 @@
+export class AppError extends Error {
+  constructor(
+    public readonly message: string,
+    public readonly statusCode: number = 400
+  ) {
+    super(message);
+    this.name = "AppError";
+  }
+}
+
+export class InvalidCpfError extends AppError {
+  constructor(message = "CPF inválido") {
+    super(message, 400);
+    this.name = "InvalidCpfError";
+  }
+}
+
+export class InvalidDateOfBirthError extends AppError {
+  constructor(message = "Data de nascimento inválida") {
+    super(message, 400);
+    this.name = "InvalidDateOfBirthError";
+  }
+}
+
+export class CpfDuplicadoError extends AppError {
+  constructor(message = "CPF já cadastrado") {
+    super(message, 409);
+    this.name = "CpfDuplicadoError";
+  }
+}
+
+export class DriverNotFoundError extends AppError {
+  constructor(message = "Motorista não encontrado") {
+    super(message, 404);
+    this.name = "DriverNotFoundError";
+  }
+}
+
+export class InvalidCoordinatesError extends AppError {
+  constructor(message = "Coordenadas inválidas") {
+    super(message, 400);
+    this.name = "InvalidCoordinatesError";
+  }
+}
+
+export class InvalidDateTimeError extends AppError {
+  constructor(message = "Data/hora inválida") {
+    super(message, 400);
+    this.name = "InvalidDateTimeError";
+  }
+}
+
+export class PassengerNotFoundError extends AppError {
+  constructor(message = "Passageiro não encontrado") {
+    super(message, 404);
+    this.name = "PassengerNotFoundError";
+  }
+}
+
+export class RaceNotFoundError extends AppError {
+  constructor(message = "Corrida não encontrada") {
+    super(message, 404);
+    this.name = "RaceNotFoundError";
+  }
+}

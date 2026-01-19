@@ -1,15 +1,15 @@
-import express from "express";
-import { env } from "./config/env";
+import "dotenv/config";
+import { createApp } from "./infrastructure/http/app";
+import { env } from "./infrastructure/config/env";
+import { logger } from "./shared/logger";
 
-const app = express();
-
-app.use(express.json());
-
-app.get("/health", (req, res) => {
-  res.status(200).json({ status: "ok" });
+const app = createApp();
+const server = app.listen(env.port, env.host, () => {
+  logger.info(`Servidor rodando em http://${env.host}:${env.port}`);
 });
 
-app.listen(env.port, () => {
-  console.log(`Servidor rodando na porta ${env.port}`);
-});
-
+const shutdown = (): void => {
+  server.close(() => process.exit(0));
+};
+process.on("SIGTERM", shutdown);
+process.on("SIGINT", shutdown);
