@@ -1,9 +1,11 @@
+import "dotenv/config";
 import { createApp } from "./infrastructure/http/app";
 import { env } from "./infrastructure/config/env";
+import { logger } from "./shared/logger";
 
 const app = createApp();
 const server = app.listen(env.port, env.host, () => {
-  console.log(`Servidor rodando em http://${env.host}:${env.port}`);
+  logger.info(`Servidor rodando em http://${env.host}:${env.port}`);
 });
 
 const shutdown = (): void => {
