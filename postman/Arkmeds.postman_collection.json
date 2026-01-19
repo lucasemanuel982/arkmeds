@@ -67,6 +67,50 @@
           }
         }
       ]
+    },
+    {
+      "name": "Fare",
+      "item": [
+        {
+          "name": "POST /fare - Calcular tarifa (dia útil 08:00)",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from\": { \"lat\": -23.5505, \"lng\": -46.6333 },\n  \"to\": { \"lat\": -22.9099, \"lng\": -47.0626 },\n  \"datetime\": \"2025-01-15T08:00:00-03:00\"\n}"
+            },
+            "url": "{{baseUrl}}/fare",
+            "description": "POST /fare - Calcular tarifa. from/to: { lat, lng }; datetime: ISO 8601 com timezone (ex: -03:00, Z). Retorna: fare, distanceKm, strategy (day|night|weekend_day|weekend_night)."
+          }
+        },
+        {
+          "name": "POST /fare - Noite 23:00 (dia útil)",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from\": { \"lat\": -23.5505, \"lng\": -46.6333 },\n  \"to\": { \"lat\": -22.9099, \"lng\": -47.0626 },\n  \"datetime\": \"2025-01-15T23:00:00-03:00\"\n}"
+            },
+            "url": "{{baseUrl}}/fare",
+            "description": "Exemplo noturno (22:00–06:00) em dia útil → strategy night."
+          }
+        },
+        {
+          "name": "POST /fare - Fim de semana 17:00",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from\": { \"lat\": -23.5505, \"lng\": -46.6333 },\n  \"to\": { \"lat\": -22.9099, \"lng\": -47.0626 },\n  \"datetime\": \"2025-01-18T17:00:00-03:00\"\n}"
+            },
+            "url": "{{baseUrl}}/fare",
+            "description": "Exemplo sábado 17:00 → strategy weekend_day. datetime com timezone -03:00."
+          }
+        }
+      ]
     }
   ],
   "event": [
