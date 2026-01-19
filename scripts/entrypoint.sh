@@ -7,5 +7,5 @@ node scripts/wait-for-db.cjs
 echo "Executando migrations..."
 npm run migrate:up
 
-echo "Iniciando aplicação..."
-exec node dist/server.js
+echo "Iniciando aplicação (PM2 cluster)..."
+exec npx pm2-runtime start ecosystem.config.cjs --only app
