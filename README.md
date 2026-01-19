@@ -6,17 +6,25 @@ Sistema de corridas (rides) com gestão de motoristas, passageiros, cálculo de 
 
 ## Sumário
 
-- [Requisitos](#requisitos)
-- [Variáveis de ambiente](#variáveis-de-ambiente)
-- [Instalação e execução local](#instalação-e-execução-local)
-- [Docker](#docker)
-- [Scripts npm](#scripts-npm)
-- [Arquitetura](#arquitetura)
-- [API](#api)
-- [Cálculo de tarifa](#cálculo-de-tarifa)
-- [Recibos e worker](#recibos-e-worker)
-- [Testes](#testes)
-- [Coleção Postman](#coleção-postman)
+- [Projeto Arkmeds](#projeto-arkmeds)
+  - [Sumário](#sumário)
+  - [Requisitos](#requisitos)
+  - [Variáveis de ambiente](#variáveis-de-ambiente)
+  - [Instalação e execução local](#instalação-e-execução-local)
+  - [Docker](#docker)
+  - [Scripts npm](#scripts-npm)
+  - [Arquitetura](#arquitetura)
+  - [API](#api)
+    - [Health](#health)
+    - [Motoristas (Driver)](#motoristas-driver)
+    - [Passageiros (Passenger)](#passageiros-passenger)
+    - [Tarifa (Fare)](#tarifa-fare)
+    - [Corrida (Race)](#corrida-race)
+  - [Cálculo de tarifa](#cálculo-de-tarifa)
+  - [Recibos e worker](#recibos-e-worker)
+  - [Testes](#testes)
+  - [Coleção Postman](#coleção-postman)
+  - [Referências](#referências)
 
 ---
 
@@ -243,6 +251,12 @@ Em `postman/Arkmeds.postman_collection.json`. Importe no Postman e defina a vari
 
 ---
 
-## Licença
+## Referências
 
-ISC.
+- [Arquitetura Hexagonal](https://medium.com/@marcio.kgr/arquitetura-hexagonal-8958fb3e5507) — Marcio Krämer (Medium)
+- [Hexagonal Architecture – Domain](https://github.com/marciokgr/hexagonal-architecture/tree/master/Domain) — Marcio Krämer (GitHub)
+- [O que é e quando devemos utilizar o padrão Repository?](https://www.branas.io/blog/o-que-e-e-quando-devemos-utilizar-o-padrao-repository.html) — Rodrigo Branas
+- [Factory Method](https://refactoring.guru/pt-br/design-patterns/factory-method) — Refactoring Guru
+- [Strategy](https://refactoring.guru/pt-br/design-patterns/strategy) — Refactoring Guru
+- [Adapter](https://refactoring.guru/pt-br/design-patterns/adapter) — Refactoring Guru
+- [Observer](https://refactoring.guru/pt-br/design-patterns/observer) — Refactoring Guru
