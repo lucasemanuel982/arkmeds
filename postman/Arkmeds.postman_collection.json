@@ -225,6 +225,29 @@
           }
         }
       ]
+    },
+    {
+      "name": "ARK-03-race",
+      "item": [
+        {
+          "name": "POST /race - Aceitar corrida",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"{{passengerId}}\",\n  \"requestId\": \"req-001\",\n  \"from\": { \"lat\": -23.5505, \"lng\": -46.6333 },\n  \"to\": { \"lat\": -22.9099, \"lng\": -47.0626 },\n  \"price\": 250.5,\n  \"distanceKm\": 100.2,\n  \"datetime\": \"2025-01-15T08:00:00-03:00\"\n}"
+            },
+            "url": "{{baseUrl}}/race",
+            "description": "POST /race - Aceitar corrida. userId = ID do passageiro; requestId = identificador da oferta; from, to, price, distanceKm, datetime. Retorna 202 Accepted. O recibo é gerado em background em {RECEIPT_BASE_PATH ou /tmp}/{userId}/{yyyy-mm-dd}.txt (JSON)."
+          }
+        }
+      ]
     }
   ],
   "event": [

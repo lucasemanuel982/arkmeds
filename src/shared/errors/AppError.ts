@@ -56,3 +56,10 @@ export class PassengerNotFoundError extends AppError {
     this.name = "PassengerNotFoundError";
   }
 }
+
+export class RaceNotFoundError extends AppError {
+  constructor(message = "Corrida não encontrada") {
+    super(message, 404);
+    this.name = "RaceNotFoundError";
+  }
+}
