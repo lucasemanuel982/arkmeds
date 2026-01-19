@@ -3,14 +3,20 @@ import { RaceRepository } from "../../persistence/repositories/RaceRepository";
 import { PassengerRepository } from "../../persistence/repositories/PassengerRepository";
 import { PostgresReceiptWriter } from "../../race/PostgresReceiptWriter";
 import { InMemoryRaceAcceptedNotifier } from "../../race/InMemoryRaceAcceptedNotifier";
+import { BullMQRaceAcceptedNotifier } from "../../race/BullMQRaceAcceptedNotifier";
 import { AcceptRace } from "../../../application/race/use-cases/AcceptRace";
 import { GenerateReceipt } from "../../../application/race/use-cases/GenerateReceipt";
+import { env } from "../../config/env";
 
 const raceRepository = new RaceRepository();
 const passengerRepository = new PassengerRepository();
 const receiptWriter = new PostgresReceiptWriter();
 const generateReceipt = new GenerateReceipt(receiptWriter);
-const notifier = new InMemoryRaceAcceptedNotifier((r) => generateReceipt.execute(r));
+
+const notifier = env.redis.url
+  ? new BullMQRaceAcceptedNotifier(env.redis.url)
+  : new InMemoryRaceAcceptedNotifier((r) => generateReceipt.execute(r));
+
 const acceptRace = new AcceptRace(raceRepository, passengerRepository, notifier);
 
 export async function accept(req: Request, res: Response): Promise<void> {

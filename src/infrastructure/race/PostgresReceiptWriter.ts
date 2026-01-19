@@ -3,7 +3,7 @@ import { query } from "../persistence/database";
 
 export class PostgresReceiptWriter implements IReceiptFileWriter {
   async write(userId: string, dateYyyyMmDd: string, content: string): Promise<void> {
-    let raceId: string;
+    let raceId: string | undefined;
     try {
       const obj = JSON.parse(content) as { id?: string };
       raceId = obj?.id;
