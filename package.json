@@ -15,7 +15,10 @@
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix",
     "format": "prettier --write \"src/**/*.{ts,json}\"",
-    "format:check": "prettier --check \"src/**/*.{ts,json}\""
+    "format:check": "prettier --check \"src/**/*.{ts,json}\"",
+    "docker:up": "docker compose up -d --build",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f app"
   },
   "author": "Lucas Emanuel Silva Dos Santos",
   "license": "ISC",
