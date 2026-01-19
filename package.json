@@ -18,7 +18,10 @@
     "format:check": "prettier --check \"src/**/*.{ts,json}\"",
     "docker:up": "docker compose up -d --build",
     "docker:down": "docker compose down",
-    "docker:logs": "docker compose logs -f app"
+    "docker:logs": "docker compose logs -f app",
+    "docker:logs:worker": "docker compose logs -f worker",
+    "worker": "node dist/receipt-worker.js",
+    "worker:dev": "ts-node-dev --respawn --transpile-only src/receipt-worker.ts"
   },
   "author": "Lucas Emanuel Silva Dos Santos",
   "license": "ISC",
@@ -40,8 +43,10 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "bullmq": "^5.34.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
+    "ioredis": "^5.4.2",
     "pg": "^8.17.1",
     "pino": "^10.2.0"
   }

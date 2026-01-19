@@ -11,4 +11,7 @@ export const env = {
   receipt: {
     basePath: process.env.RECEIPT_BASE_PATH ?? os.tmpdir(),
   },
+  redis: {
+    url: process.env.REDIS_URL ?? null as string | null,
+  },
 };
