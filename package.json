@@ -7,7 +7,7 @@
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "test": "jest --testPathIgnorePatterns=driver.integration",
+    "test": "jest --testPathIgnorePatterns=integration.test",
     "test:all": "jest",
     "test:coverage": "jest --coverage",
     "migrate:up": "node-pg-migrate up -m src/infrastructure/persistence/migrations",

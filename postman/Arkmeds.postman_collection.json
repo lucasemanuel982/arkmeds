@@ -16,15 +16,26 @@
             {
               "listen": "test",
               "script": {
-                "exec": ["var j = pm.response.json();", "if (pm.response.code === 201 && j.id) { pm.collectionVariables.set('driverId', j.id); }"],
+                "exec": [
+                  "var j = pm.response.json();",
+                  "if (pm.response.code === 201 && j.id) { pm.collectionVariables.set('driverId', j.id); }"
+                ],
                 "type": "text/javascript"
               }
             }
           ],
           "request": {
             "method": "POST",
-            "header": [ { "key": "Content-Type", "value": "application/json" } ],
-            "body": { "mode": "raw", "raw": "{\n  \"nome\": \"João Silva\",\n  \"cpf\": \"111.444.777-35\",\n  \"dataNascimento\": \"1990-05-15\",\n  \"sexo\": \"M\",\n  \"endereco\": {\n    \"rua\": \"Rua das Flores\",\n    \"numero\": \"123\",\n    \"bairro\": \"Centro\",\n    \"cidade\": \"São Paulo\",\n    \"cep\": \"01000-000\"\n  }\n}" },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"João Silva\",\n  \"cpf\": \"111.444.777-35\",\n  \"dataNascimento\": \"1990-05-15\",\n  \"sexo\": \"M\",\n  \"endereco\": {\n    \"rua\": \"Rua das Flores\",\n    \"numero\": \"123\",\n    \"bairro\": \"Centro\",\n    \"cidade\": \"São Paulo\",\n    \"cep\": \"01000-000\"\n  }\n}"
+            },
             "url": "{{baseUrl}}/driver",
             "description": "POST /driver - Criar motorista. Erros: 400 (CPF inválido, data inválida, body inválido), 409 (CPF duplicado)."
           }
@@ -51,8 +62,16 @@
           "name": "Atualizar motorista",
           "request": {
             "method": "PUT",
-            "header": [ { "key": "Content-Type", "value": "application/json" } ],
-            "body": { "mode": "raw", "raw": "{\n  \"nome\": \"João Silva Atualizado\",\n  \"sexo\": \"M\"\n}" },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"João Silva Atualizado\",\n  \"sexo\": \"M\"\n}"
+            },
             "url": "{{baseUrl}}/driver/{{driverId}}",
             "description": "PUT /driver/:id - Atualizar. Campos opcionais: nome, cpf, dataNascimento, sexo, endereco. 400 (CPF/data inválidos), 404, 409 (CPF duplicado)."
           }
@@ -69,13 +88,98 @@
       ]
     },
     {
+      "name": "ARK-01-passenger",
+      "item": [
+        {
+          "name": "Criar passenger",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var j = pm.response.json();",
+                  "if (pm.response.code === 201 && j.id) { pm.collectionVariables.set('passengerId', j.id); }"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Maria Santos\",\n  \"cpf\": \"111.444.777-35\",\n  \"dataNascimento\": \"1992-08-20\",\n  \"sexo\": \"F\",\n  \"endereco\": {\n    \"rua\": \"Rua das Flores\",\n    \"numero\": \"456\",\n    \"bairro\": \"Centro\",\n    \"cidade\": \"Rio de Janeiro\",\n    \"cep\": \"20000-000\"\n  }\n}"
+            },
+            "url": "{{baseUrl}}/passenger",
+            "description": "POST /passenger - Criar passenger. Erros: 400 (CPF inválido, data inválida, body inválido), 409 (CPF duplicado)."
+          }
+        },
+        {
+          "name": "Listar passengers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/passenger",
+            "description": "GET /passenger - Listar passengers."
+          }
+        },
+        {
+          "name": "Buscar passenger por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/passenger/{{passengerId}}",
+            "description": "GET /passenger/:id - Buscar por id. 404 se não existir."
+          }
+        },
+        {
+          "name": "Atualizar passenger",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Maria Santos Atualizado\",\n  \"sexo\": \"F\"\n}"
+            },
+            "url": "{{baseUrl}}/passenger/{{passengerId}}",
+            "description": "PUT /passenger/:id - Atualizar. Campos opcionais: nome, cpf, dataNascimento, sexo, endereco. 400 (CPF/data inválidos), 404, 409 (CPF duplicado)."
+          }
+        },
+        {
+          "name": "Remover passenger",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/passenger/{{passengerId}}",
+            "description": "DELETE /passenger/:id - Remover. 404 se não existir."
+          }
+        }
+      ]
+    },
+    {
       "name": "Fare",
       "item": [
         {
           "name": "POST /fare - Calcular tarifa (dia útil 08:00)",
           "request": {
             "method": "POST",
-            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"from\": { \"lat\": -23.5505, \"lng\": -46.6333 },\n  \"to\": { \"lat\": -22.9099, \"lng\": -47.0626 },\n  \"datetime\": \"2025-01-15T08:00:00-03:00\"\n}"
@@ -88,7 +192,12 @@
           "name": "POST /fare - Noite 23:00 (dia útil)",
           "request": {
             "method": "POST",
-            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"from\": { \"lat\": -23.5505, \"lng\": -46.6333 },\n  \"to\": { \"lat\": -22.9099, \"lng\": -47.0626 },\n  \"datetime\": \"2025-01-15T23:00:00-03:00\"\n}"
@@ -101,7 +210,12 @@
           "name": "POST /fare - Fim de semana 17:00",
           "request": {
             "method": "POST",
-            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"from\": { \"lat\": -23.5505, \"lng\": -46.6333 },\n  \"to\": { \"lat\": -22.9099, \"lng\": -47.0626 },\n  \"datetime\": \"2025-01-18T17:00:00-03:00\"\n}"
@@ -145,6 +259,11 @@
     },
     {
       "key": "driverId",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "passengerId",
       "value": "",
       "type": "default"
     }

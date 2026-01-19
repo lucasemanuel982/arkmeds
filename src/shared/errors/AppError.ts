@@ -49,3 +49,10 @@ export class InvalidDateTimeError extends AppError {
     this.name = "InvalidDateTimeError";
   }
 }
+
+export class PassengerNotFoundError extends AppError {
+  constructor(message = "Passageiro não encontrado") {
+    super(message, 404);
+    this.name = "PassengerNotFoundError";
+  }
+}
